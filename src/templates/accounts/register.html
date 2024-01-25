@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="content">
+    <div class="container d-flex align-items-center justify-content-center p-5">
+        <div class="card p-5 bg-white col-md-8">
+            <form method="POST" style="margin: auto;" class="text-center mt-5 mb-5">
+                <h2 class="mb-5">Registration</h2>
+
+                {% csrf_token %}
+
+                {% for element in form %}
+                <div>{{element}}</div>
+                <br/>
+                {% endfor %}
+
+                {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+                {% endfor %}
+
+                <button type="submit" class="btn btn-primary float-end">Sign Up</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

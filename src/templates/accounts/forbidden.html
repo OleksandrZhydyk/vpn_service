@@ -1,0 +1,14 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<div class="container">
+    <div class="content pt-5 mt-5" >
+        <p class="text-center fs-3 fst-italic" style="margin=auto;">
+            You're not authorized! Please, login before
+        </p>
+        <a class="nav-link text-center" href="{%url 'login'%}">
+            <button class="btn btn-primary" type="button">Login</button>
+        </a>
+    </div>
+</div>
+{% endblock %}

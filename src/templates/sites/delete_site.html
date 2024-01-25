@@ -1,0 +1,33 @@
+{% extends 'base.html'%}
+{% block content %}
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Site name</th>
+        <th scope="col">Site url</th>
+        <th scope="col">Moves by pages</th>
+        <th scope="col">Upload data size</th>
+        <th scope="col">Received data size</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th scope="row" class="align-middle">
+            {{ forloop.counter }}
+        </th>
+        <td class="align-middle">{{site.name}}</td>
+        <td class="align-middle">{{site.url}}</td>
+        <td class="align-middle">{{site.moves_by_pages }}</td>
+        <td class="align-middle">{{site.upload_data_size}}</td>
+        <td class="align-middle">{{site.received_data_size }}</td>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<form method="POST" style="margin: auto;" class="col-md-4 text-center" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p class="text-center fs-3 fst-italic mt-5">Do you want to delete site: "{{site.url}}" ?</p>
+    <input type="submit" value="Delete" class="btn btn-danger">
+</form>
+{% endblock content %}

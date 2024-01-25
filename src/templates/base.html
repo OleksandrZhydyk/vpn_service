@@ -1,0 +1,43 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+            crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.6"
+            integrity="sha384-Bj8qm/6B+71E6FQSySofJOUjA/gq330vEqjFx9LakWybUySyI1IQHwPtbTU7bNwx"
+            crossorigin="anonymous"></script>
+
+</head>
+<body>
+{% if user.is_authenticated %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <div class="nav navbar-nav mr-auto">
+            <a class="navbar-brand" href="#">VPN Service</a>
+            <a class="nav-link active ms-5" href="{%url 'get_statistics'%}">Statistics</a>
+        </div>
+        <div class="nav navbar-nav ml-auto">
+            <div>
+                <p class="text-center mt-2 me-3">Hello, <a class="fw-bold" href="{% url 'user_profile' user.profile.pk%}">{{ user.username }}</a></p>
+            </div>
+            <form method="POST" class="form-inline" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Logout</button>
+            </form>
+        </div>
+    </div>
+</nav>
+</br>
+{% endif %}
+
+<div class="container">
+    {% block content %}
+    {% endblock %}
+</div>
+
+</body>
+</html>

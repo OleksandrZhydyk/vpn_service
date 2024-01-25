@@ -1,0 +1,48 @@
+{% extends 'base.html'%}
+{% block content %}
+
+<div class="row mt-4">
+    <div class="col-10">
+        <div class="row mb-3">
+            <div class="col">
+                <h3>Statistics</h3>
+            </div>
+            <div class="col">
+                <a href="{%url 'create_site'%}">
+                    <button type="button" class="btn btn-success fs-6 float-end">+ Add site</button>
+                </a>
+            </div></div>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Site name</th>
+                    <th scope="col">Site url</th>
+                    <th scope="col">Moves by pages</th>
+                    <th scope="col">Upload data size, MB</th>
+                    <th scope="col">Received data size, MB</th>
+                    <th scope="col">Move to site</th>
+                    <th scope="col">Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                {%for statistic in statistics%}
+                <tr>
+                    <th scope="row" class="align-middle">
+                        {{ forloop.counter }}
+                    </th>
+                    <td class="align-middle">{{statistic.name}}</td>
+                    <td class="align-middle">{{statistic.url}}</td>
+                    <td class="align-middle">{{statistic.moves_by_pages }}</td>
+                    <td class="align-middle">{{statistic.upload_data_size}}</td>
+                    <td class="align-middle">{{statistic.received_data_size }}</td>
+                    <td class="align-middle"><a class='btn btn-success' href="{{statistic.name}}/{{statistic.url}}">Move to</a></td>
+                    <td class="align-middle"><a class='btn btn-danger' href="{%url 'delete_site' statistic.pk%}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endblock %}
